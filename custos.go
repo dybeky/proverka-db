@@ -4,7 +4,9 @@ import (
 	"fmt"
 	"os"
 	"os/exec"
+	"os/signal"
 	"path/filepath"
+	"sync"
 	"syscall"
 	"time"
 	"unsafe"
@@ -22,6 +24,13 @@ var (
 	procGetConsoleWindow = kernel32.NewProc("GetConsoleWindow")
 	procSetWindowLong    = user32.NewProc("SetWindowLongW")
 	procGetWindowLong    = user32.NewProc("GetWindowLongW")
+	procSetConsoleCtrlHandler = kernel32.NewProc("SetConsoleCtrlHandler")
+)
+
+// Глобальный список процессов для отслеживания
+var (
+	runningProcesses = make(map[*exec.Cmd]bool)
+	processMutex     sync.Mutex
 )
 
 // Цвета для консоли
@@ -47,6 +56,50 @@ const (
 	WS_SIZEBOX     = 0x00040000
 	WS_MAXIMIZEBOX = 0x00010000
 )
+
+// Добавление процесса в список отслеживания
+func trackProcess(cmd *exec.Cmd) {
+	processMutex.Lock()
+	runningProcesses[cmd] = true
+	processMutex.Unlock()
+}
+
+// Удаление процесса из списка отслеживания
+func untrackProcess(cmd *exec.Cmd) {
+	processMutex.Lock()
+	delete(runningProcesses, cmd)
+	processMutex.Unlock()
+}
+
+// Завершение всех запущенных процессов
+func killAllProcesses() {
+	processMutex.Lock()
+	defer processMutex.Unlock()
+
+	for cmd := range runningProcesses {
+		if cmd.Process != nil {
+			cmd.Process.Kill()
+		}
+	}
+	runningProcesses = make(map[*exec.Cmd]bool)
+}
+
+// Обработчик закрытия консоли
+func setupCloseHandler() {
+	c := make(chan os.Signal, 1)
+	signal.Notify(c, os.Interrupt, syscall.SIGTERM)
+
+	go func() {
+		<-c
+		cleanup()
+		os.Exit(0)
+	}()
+}
+
+// Функция очистки ресурсов
+func cleanup() {
+	killAllProcesses()
+}
 
 // Проверка прав администратора
 func isAdmin() bool {
@@ -204,6 +257,12 @@ func openFolder(path, desc string) bool {
 		return false
 	}
 
+	trackProcess(cmd)
+	go func() {
+		cmd.Wait()
+		untrackProcess(cmd)
+	}()
+
 	log(fmt.Sprintf("%s: %s", desc, path), true)
 	return true
 }
@@ -216,6 +275,12 @@ func runCommand(command, desc string) bool {
 		log(fmt.Sprintf("Ошибка: %v", err), false)
 		return false
 	}
+
+	trackProcess(cmd)
+	go func() {
+		cmd.Wait()
+		untrackProcess(cmd)
+	}()
 
 	log(desc, true)
 	return true
@@ -238,6 +303,12 @@ func openRegistry(path string) bool {
 		log(fmt.Sprintf("Ошибка: %v", err), false)
 		return false
 	}
+
+	trackProcess(cmdReg)
+	go func() {
+		cmdReg.Wait()
+		untrackProcess(cmdReg)
+	}()
 
 	log(fmt.Sprintf("Путь скопирован: %s", path), true)
 	fmt.Printf("%sВставьте путь в regedit (Ctrl+V)%s\n", ColorYellow, ColorReset)
@@ -344,8 +415,17 @@ func registryMenu() {
 		switch choice {
 		case 1:
 			cmd := exec.Command("regedit.exe")
-			cmd.Start()
-			log("Regedit открыт", true)
+			err := cmd.Start()
+			if err == nil {
+				trackProcess(cmd)
+				go func() {
+					cmd.Wait()
+					untrackProcess(cmd)
+				}()
+				log("Regedit открыт", true)
+			} else {
+				log(fmt.Sprintf("Ошибка: %v", err), false)
+			}
 			pause()
 		case 2:
 			openRegistry(`HKEY_CURRENT_USER\SOFTWARE\Classes\Local Settings\Software\Microsoft\Windows\Shell\MuiCache`)
@@ -481,6 +561,7 @@ func mainMenu() {
 		case 0:
 			fmt.Printf("\n%s✖ Завершение работы...%s\n", ColorCyan+ColorBold, ColorReset)
 			time.Sleep(500 * time.Millisecond)
+			cleanup()
 			return
 		case 1:
 			networkMenu()
@@ -512,8 +593,15 @@ func main() {
 	// Проверка и запрос прав администратора
 	runAsAdmin()
 
+	// Настройка обработчика закрытия консоли
+	setupCloseHandler()
+
 	// Настройка консоли (цвета, фиксированный размер)
 	setupConsole()
 
+	// Запуск главного меню
 	mainMenu()
+
+	// Очистка при нормальном выходе
+	cleanup()
 }
