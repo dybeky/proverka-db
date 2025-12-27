@@ -33,6 +33,14 @@ where rsrc >nul 2>&1
 if %errorlevel% neq 0 (
     echo [2/4] Установка rsrc для встраивания манифеста...
     go install github.com/akavel/rsrc@latest
+    if %errorlevel% neq 0 (
+        echo.
+        echo [ERROR] Ошибка установки rsrc!
+        pause
+        exit /b 1
+    )
+    echo.
+    echo rsrc успешно установлен.
     echo.
 ) else (
     echo [2/4] rsrc уже установлен
@@ -40,6 +48,11 @@ if %errorlevel% neq 0 (
 )
 
 echo [3/4] Создание файла ресурсов с манифестом...
+REM Удаляем старый файл ресурсов, если существует
+if exist rsrc.syso (
+    del rsrc.syso
+    echo Старый rsrc.syso удален.
+)
 rsrc -manifest custos.manifest -o rsrc.syso
 if %errorlevel% neq 0 (
     echo.
@@ -47,20 +60,29 @@ if %errorlevel% neq 0 (
     pause
     exit /b 1
 )
+echo Файл ресурсов создан успешно.
 echo.
 
-echo [4/4] Компиляция custos.go...
+echo [4/4] Компиляция custos...
 echo.
 
 REM Компиляция с флагами для уменьшения размера
 REM -ldflags "-s -w" убирает отладочную информацию
 REM rsrc.syso автоматически встроится с манифестом
 
-go build -ldflags "-s -w" -o custos.exe custos.go
+REM Удаляем старый исполняемый файл, если существует
+if exist custos.exe (
+    del custos.exe
+    echo Старый custos.exe удален.
+)
+
+go build -ldflags "-s -w" -o custos.exe ./cmd/custos
 
 if %errorlevel% neq 0 (
     echo.
     echo [ERROR] Ошибка компиляции!
+    echo Очистка промежуточных файлов...
+    if exist rsrc.syso del rsrc.syso
     pause
     exit /b 1
 )
@@ -73,8 +95,14 @@ echo.
 echo Создан файл:
 echo   • custos.exe - готовая программа с правами администратора
 echo.
+echo Размер:
+for %%A in (custos.exe) do echo   %%~zA байт
+echo.
 echo Для запуска:
 echo   1. Дважды кликните на custos.exe
 echo   2. Подтвердите запрос на права администратора (появится автоматически)
+echo.
+echo Промежуточный файл rsrc.syso сохранен для повторной сборки.
+echo Для очистки используйте: del rsrc.syso
 echo.
 pause
