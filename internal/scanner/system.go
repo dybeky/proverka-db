@@ -7,7 +7,6 @@ import (
 	"strings"
 	"sync"
 
-	"manual-cobra/internal/report"
 	"manual-cobra/internal/ui"
 )
 
@@ -83,7 +82,6 @@ func ScanSystemFolders() {
 		}
 	}
 
-	report.Results.SystemFiles = allResults
 
 	fmt.Println()
 	if len(allResults) > 0 {

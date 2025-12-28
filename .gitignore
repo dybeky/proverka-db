@@ -34,13 +34,9 @@ vendor/
 build/
 dist/
 
-# Config files with sensitive data
-config.json
+# Config files
 .env
 .env.local
-
-# Generated embedded config (contains encrypted credentials)
-internal/config/embedded.go
 
 # Claude settings (may contain API keys)
 .claude/

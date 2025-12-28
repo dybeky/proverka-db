@@ -8,7 +8,6 @@ import (
 	"path/filepath"
 	"strings"
 
-	"manual-cobra/internal/report"
 	"manual-cobra/internal/ui"
 	"manual-cobra/pkg/keywords"
 )
@@ -103,7 +102,6 @@ func SearchRegistry() {
 		}
 	}
 
-	report.Results.RegistryFindings = allFindings
 
 	fmt.Println()
 	if len(allFindings) > 0 {

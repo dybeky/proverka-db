@@ -50,14 +50,9 @@ func PrintMenu(title string, options []string, showBack bool) {
 	fmt.Println()
 }
 
-// Log выводит сообщение с временной меткой
+// Log - заглушка (логирование отключено)
 func Log(msg string, ok bool) {
-	t := time.Now().Format("15:04:05")
-	if ok {
-		fmt.Printf("  %s[%s]%s %s✓%s %s\n", ColorBlue, t, ColorReset, ColorGreen+ColorBold, ColorReset, msg)
-	} else {
-		fmt.Printf("  %s[%s]%s %s✗%s %s\n", ColorBlue, t, ColorReset, ColorRed+ColorBold, ColorReset, msg)
-	}
+	// Логирование отключено
 }
 
 // Pause ожидает нажатия Enter

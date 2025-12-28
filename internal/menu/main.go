@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"time"
 
-	"manual-cobra/internal/report"
 	"manual-cobra/internal/ui"
 	"manual-cobra/internal/winapi"
 )
@@ -17,11 +16,9 @@ func MainMenu() {
 			"🔍 Ручная проверка",
 			"🤖 Автоматическая проверка",
 			"✨ EXXXXXTRA",
-			"────────────────────────────────",
-			"📤 ЗАВЕРШИТЬ ПРОВЕРКУ (отправить отчет)",
 		}, false)
 
-		choice := ui.GetChoice(5)
+		choice := ui.GetChoice(3)
 
 		switch choice {
 		case 0:
@@ -42,11 +39,6 @@ func MainMenu() {
 			AutoCheckMenu()
 		case 3:
 			ExtraMenu()
-		case 4:
-			continue
-		case 5:
-			ui.ClearScreen()
-			report.SendDiscordReport()
 		}
 	}
 }

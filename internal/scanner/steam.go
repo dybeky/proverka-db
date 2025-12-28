@@ -6,7 +6,6 @@ import (
 	"path/filepath"
 	"strings"
 
-	"manual-cobra/internal/report"
 	"manual-cobra/internal/ui"
 )
 
@@ -22,7 +21,6 @@ func ParseSteamAccountsFromPath(vdfPath string) {
 	lines := strings.Split(content, "\n")
 
 	accounts := []string{}
-	accountsInfo := []report.SteamAccountInfo{}
 	var currentSteamID string
 
 	for _, line := range lines {
@@ -40,12 +38,6 @@ func ParseSteamAccountsFromPath(vdfPath string) {
 			if len(parts) >= 4 {
 				accountName := parts[3]
 
-				accountInfo := report.SteamAccountInfo{
-					SteamID:     currentSteamID,
-					AccountName: accountName,
-				}
-				accountsInfo = append(accountsInfo, accountInfo)
-
 				// Формируем строку для отображения
 				displayStr := fmt.Sprintf("SteamID: %s | Имя: %s", currentSteamID, accountName)
 				fmt.Printf("%s►%s %s\n", ui.ColorCyan, ui.ColorReset, displayStr)
@@ -56,8 +48,6 @@ func ParseSteamAccountsFromPath(vdfPath string) {
 		}
 	}
 
-	report.Results.SteamAccounts = accounts
-	report.Results.SteamAccountsInfo = accountsInfo
 
 	fmt.Println()
 	if len(accounts) > 0 {

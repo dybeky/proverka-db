@@ -7,7 +7,6 @@ import (
 	"strings"
 	"sync"
 
-	"manual-cobra/internal/report"
 	"manual-cobra/internal/ui"
 )
 
@@ -76,7 +75,6 @@ func ScanAppData() {
 		}
 	}
 
-	report.Results.AppDataFiles = allResults
 
 	fmt.Println()
 	if len(allResults) > 0 {

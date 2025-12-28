@@ -6,7 +6,6 @@ import (
 	"path/filepath"
 	"strings"
 
-	"manual-cobra/internal/report"
 	"manual-cobra/internal/ui"
 	"manual-cobra/pkg/keywords"
 )
@@ -58,7 +57,6 @@ func ScanPrefetch() {
 		}
 	}
 
-	report.Results.PrefetchFiles = suspiciousFiles
 
 	fmt.Println()
 	if len(suspiciousFiles) > 0 {

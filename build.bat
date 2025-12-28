@@ -47,26 +47,7 @@ if %errorlevel% neq 0 (
     echo.
 )
 
-REM Проверка наличия config.json
-if not exist "config.json" (
-    echo.
-    echo [ERROR] config.json не найден!
-    echo Создайте config.json с вашими Discord данными.
-    pause
-    exit /b 1
-)
-
-echo [3/5] Шифрование и встраивание config.json...
-go run tools\encrypt_config.go
-if %errorlevel% neq 0 (
-    echo.
-    echo [ERROR] Ошибка шифрования конфигурации!
-    pause
-    exit /b 1
-)
-echo.
-
-echo [4/5] Создание файла ресурсов с манифестом...
+echo [3/4] Создание файла ресурсов с манифестом...
 REM Удаляем старый файл ресурсов, если существует
 if exist rsrc.syso (
     del rsrc.syso
@@ -82,7 +63,7 @@ if %errorlevel% neq 0 (
 echo Файл ресурсов создан успешно.
 echo.
 
-echo [5/5] Компиляция custosAC...
+echo [4/4] Компиляция custosAC...
 echo.
 
 REM Компиляция с флагами для уменьшения размера
@@ -121,12 +102,9 @@ echo Для запуска:
 echo   1. Дважды кликните на custosAC.exe
 echo   2. Подтвердите запрос на права администратора (появится автоматически)
 echo.
-echo ВАЖНО - БЕЗОПАСНОСТЬ:
-echo   • config.json встроен и зашифрован внутри .exe файла
+echo ВАЖНО:
 echo   • Программа работает автономно без внешних файлов
-echo   • НЕ загружайте internal\config\embedded.go на GitHub!
-echo   • config.json уже в .gitignore
-echo   • Для большей безопасности измените XOR ключ в tools\encrypt_config.go
+echo   • Не требует конфигурации
 echo.
 echo Промежуточный файл rsrc.syso сохранен для повторной сборки.
 echo Для очистки используйте: del rsrc.syso
