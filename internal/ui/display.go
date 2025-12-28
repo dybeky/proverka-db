@@ -87,7 +87,7 @@ func DisplayFilesWithPagination(files []string, itemsPerPage int) {
 			fmt.Printf("  %s[%d]%s %s\n", ColorCyan, i+1, ColorReset, files[i])
 		}
 
-		fmt.Printf("\n%s%s%s\n", ColorCyan, strings.Repeat("─", 100), ColorReset)
+		fmt.Printf("\n%s%s%s\n", ColorCyan, strings.Repeat("─", 120), ColorReset)
 		fmt.Printf("\n%sНавигация:%s\n", ColorYellow+ColorBold, ColorReset)
 
 		if currentPage > 0 {

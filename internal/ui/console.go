@@ -36,8 +36,14 @@ const (
 func SetupConsole() {
 	// Устанавливаем стандартный размер окна консоли
 	// Пользователь может изменять размер окна вручную
-	cmd := exec.Command("cmd", "/c", "mode", "con:", "cols=100", "lines=30")
+	cmd := exec.Command("cmd", "/c", "mode", "con:", "cols=120", "lines=40")
 	cmd.Run()
+
+	// Устанавливаем большой буфер прокрутки (9999 строк)
+	// Это позволит прокручивать консоль даже при большом количестве вывода
+	cmdBuffer := exec.Command("powershell", "-Command",
+		"$host.UI.RawUI.BufferSize = New-Object System.Management.Automation.Host.Size(120, 9999)")
+	cmdBuffer.Run()
 
 	// Настраиваем режим консоли для поддержки ANSI цветов
 	handle := uintptr(syscall.Stdout)

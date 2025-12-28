@@ -44,7 +44,7 @@ func ScanSystemFolders() {
 		}
 
 		if processedFolders > 0 {
-			fmt.Printf("\n%s%s%s\n\n", ui.ColorCyan, strings.Repeat("─", 100), ui.ColorReset)
+			fmt.Printf("\n%s%s%s\n\n", ui.ColorCyan, strings.Repeat("─", 120), ui.ColorReset)
 		}
 		processedFolders++
 

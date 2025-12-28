@@ -38,7 +38,7 @@ func ScanAppData() {
 
 	for i, folder := range folders {
 		if i > 0 {
-			fmt.Printf("\n%s%s%s\n\n", ui.ColorCyan, strings.Repeat("─", 100), ui.ColorReset)
+			fmt.Printf("\n%s%s%s\n\n", ui.ColorCyan, strings.Repeat("─", 120), ui.ColorReset)
 		}
 
 		fmt.Printf("%s[СКАНИРОВАНИЕ %d/%d]%s %s%s\n", ui.ColorYellow+ui.ColorBold, i+1, len(folders), ui.ColorReset, ui.ColorCyan, folder.name)
