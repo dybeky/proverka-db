@@ -6,7 +6,12 @@
       "Bash(git commit:*)",
       "Bash(git push:*)",
       "Bash(go mod tidy:*)",
-      "Bash(dir:*)"
+      "Bash(dir:*)",
+      "Bash(go run:*)",
+      "Bash(go build:*)",
+      "Bash(findstr:*)",
+      "Bash(del custos_test.exe)",
+      "Bash(git check-ignore:*)"
     ]
   }
 }
