@@ -50,7 +50,7 @@ public static class AppDataScanner
 
                 foreach (var result in results)
                 {
-                    Console.WriteLine($"  {ConsoleUI.ColorRed}►{ConsoleUI.ColorReset} {result}");
+                    Console.WriteLine($"  {ConsoleUI.Arrow} {result}");
                 }
 
                 Console.WriteLine();
@@ -67,7 +67,7 @@ public static class AppDataScanner
             ConsoleUI.Log($"Всего найдено подозрительных файлов: {allResults.Count}", false);
             Console.WriteLine($"\n{ConsoleUI.ColorGreen}[V]{ConsoleUI.ColorReset} - Просмотреть все файлы постранично");
             Console.WriteLine($"{ConsoleUI.ColorCyan}[0]{ConsoleUI.ColorReset} - Продолжить");
-            Console.Write($"\n{ConsoleUI.ColorGreen}{ConsoleUI.ColorBold}►{ConsoleUI.ColorReset} Выберите действие: ");
+            Console.Write($"\n{ConsoleUI.ColorGreen}{ConsoleUI.ColorBold}[>]{ConsoleUI.ColorReset} Выберите действие: ");
 
             var choice = Console.ReadLine()?.ToLower().Trim();
 

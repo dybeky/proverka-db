@@ -19,7 +19,7 @@ public static class RegistryScanner
         };
 
         ConsoleUI.Log("Начинается поиск в реестре...", true);
-        Console.WriteLine($"{ConsoleUI.ColorYellow}⚠ Для поиска используется временный экспорт{ConsoleUI.ColorReset}\n");
+        Console.WriteLine($"{ConsoleUI.Warning} {ConsoleUI.ColorYellow}Для поиска используется временный экспорт{ConsoleUI.ColorReset}\n");
 
         var allFindings = new List<string>();
         var tempDir = Path.Combine(Path.GetTempPath(), "custosAC_temp");
@@ -69,7 +69,7 @@ public static class RegistryScanner
 
                     if (process?.ExitCode != 0 || !File.Exists(outputFile))
                     {
-                        Console.WriteLine($"{ConsoleUI.ColorYellow}✗{ConsoleUI.ColorReset} Ключ не существует или недоступен: {regKey.name}\n");
+                        Console.WriteLine($"{ConsoleUI.Warning} {ConsoleUI.ColorYellow}Ключ не существует или недоступен: {regKey.name}{ConsoleUI.ColorReset}\n");
                         continue;
                     }
 
@@ -102,7 +102,7 @@ public static class RegistryScanner
                         foreach (var finding in findings)
                         {
                             allFindings.Add($"[{regKey.name}] {finding}");
-                            Console.WriteLine($"  {ConsoleUI.ColorRed}►{ConsoleUI.ColorReset} {finding}");
+                            Console.WriteLine($"  {ConsoleUI.Arrow} {finding}");
                         }
 
                         Console.WriteLine();
@@ -114,7 +114,7 @@ public static class RegistryScanner
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine($"{ConsoleUI.ColorRed}✗{ConsoleUI.ColorReset} Ошибка сканирования {regKey.name}: {ex.Message}\n");
+                    Console.WriteLine($"{ConsoleUI.Error} {ConsoleUI.ColorRed}Ошибка сканирования {regKey.name}: {ex.Message}{ConsoleUI.ColorReset}\n");
                 }
             }
         }
@@ -137,7 +137,7 @@ public static class RegistryScanner
             ConsoleUI.Log($"Всего найдено подозрительных записей: {allFindings.Count}", false);
             Console.WriteLine($"\n{ConsoleUI.ColorGreen}[V]{ConsoleUI.ColorReset} - Просмотреть все записи постранично");
             Console.WriteLine($"{ConsoleUI.ColorCyan}[0]{ConsoleUI.ColorReset} - Продолжить");
-            Console.Write($"\n{ConsoleUI.ColorGreen}{ConsoleUI.ColorBold}►{ConsoleUI.ColorReset} Выберите действие: ");
+            Console.Write($"\n{ConsoleUI.ColorGreen}{ConsoleUI.ColorBold}[>]{ConsoleUI.ColorReset} Выберите действие: ");
 
             var choice = Console.ReadLine()?.ToLower().Trim();
 

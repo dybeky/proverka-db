@@ -12,9 +12,9 @@ public static class MainMenu
             ConsoleUI.PrintHeader();
             ConsoleUI.PrintMenu("ГЛАВНОЕ МЕНЮ", new[]
             {
-                "🔍 Ручная проверка",
-                "🤖 Автоматическая проверка",
-                "✨ EXXXXXTRA"
+                "Ручная проверка",
+                "Автоматическая проверка",
+                "EXXXXXTRA"
             }, false);
 
             int choice = ConsoleUI.GetChoice(3);
@@ -26,7 +26,7 @@ public static class MainMenu
                     Console.WriteLine("\n\n");
                     Console.WriteLine($"  {ConsoleUI.ColorCyan}{ConsoleUI.ColorBold}╔════════════════════════════════════════════╗{ConsoleUI.ColorReset}");
                     Console.WriteLine($"  {ConsoleUI.ColorCyan}║                                            ║{ConsoleUI.ColorReset}");
-                    Console.WriteLine($"  {ConsoleUI.ColorCyan}║{ConsoleUI.ColorReset}     {ConsoleUI.ColorYellow}⚡ Закрываем открытые процессы... ⚡{ConsoleUI.ColorReset}    {ConsoleUI.ColorCyan}║{ConsoleUI.ColorReset}");
+                    Console.WriteLine($"  {ConsoleUI.ColorCyan}║{ConsoleUI.ColorReset}     {ConsoleUI.ColorYellow}+ Закрываем открытые процессы... +{ConsoleUI.ColorReset}    {ConsoleUI.ColorCyan}║{ConsoleUI.ColorReset}");
                     Console.WriteLine($"  {ConsoleUI.ColorCyan}║                                            ║{ConsoleUI.ColorReset}");
                     Console.WriteLine($"  {ConsoleUI.ColorCyan}{ConsoleUI.ColorBold}╚════════════════════════════════════════════╝{ConsoleUI.ColorReset}");
                     Thread.Sleep(800);

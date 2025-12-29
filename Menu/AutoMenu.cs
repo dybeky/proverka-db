@@ -10,7 +10,7 @@ public static class AutoMenu
         while (true)
         {
             ConsoleUI.PrintHeader();
-            ConsoleUI.PrintMenu("🤖 АВТОМАТИЧЕСКАЯ ПРОВЕРКА", new[]
+            ConsoleUI.PrintMenu("АВТОМАТИЧЕСКАЯ ПРОВЕРКА", new[]
             {
                 "Автосканирование AppData",
                 "Автосканирование системных папок",
@@ -20,7 +20,7 @@ public static class AutoMenu
                 "Проверка сайтов (oplata.info, funpay.com)",
                 "Проверка Telegram (боты и загрузки)",
                 "────────────────────────────────",
-                "🚀 ЗАПУСТИТЬ ВСЕ ПРОВЕРКИ"
+                "> ЗАПУСТИТЬ ВСЕ ПРОВЕРКИ"
             }, true);
 
             int choice = ConsoleUI.GetChoice(9);
@@ -65,7 +65,7 @@ public static class AutoMenu
 
                     ConsoleUI.PrintHeader();
                     Console.WriteLine($"\n{ConsoleUI.ColorGreen}{ConsoleUI.ColorBold}═══ ВСЕ ПРОВЕРКИ ЗАВЕРШЕНЫ ═══{ConsoleUI.ColorReset}\n");
-                    ConsoleUI.Log("✓ Все автоматические проверки выполнены!", true);
+                    ConsoleUI.Log("+ Все автоматические проверки выполнены!", true);
                     ConsoleUI.Pause();
                     break;
             }

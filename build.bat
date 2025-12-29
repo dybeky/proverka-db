@@ -21,7 +21,7 @@ if exist bin rmdir /s /q bin
 if exist obj rmdir /s /q obj
 
 echo [2/3] Сборка проекта...
-dotnet build -c Release
+dotnet build CustosAC.csproj -c Release
 
 if %errorlevel% neq 0 (
     echo.
@@ -31,7 +31,7 @@ if %errorlevel% neq 0 (
 )
 
 echo [3/3] Публикация (single file)...
-dotnet publish -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -o publish
+dotnet publish CustosAC.csproj -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -o publish
 
 if %errorlevel% neq 0 (
     echo.

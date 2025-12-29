@@ -34,7 +34,7 @@ public static class SteamScanner
                     {
                         var accountName = parts[3];
                         var displayStr = $"SteamID: {currentSteamId} | Имя: {accountName}";
-                        Console.WriteLine($"{ConsoleUI.ColorCyan}►{ConsoleUI.ColorReset} {displayStr}");
+                        Console.WriteLine($"  {ConsoleUI.Arrow} {displayStr}");
                         accounts.Add(displayStr);
                         currentSteamId = null;
                     }

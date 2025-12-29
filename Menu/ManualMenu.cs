@@ -12,7 +12,7 @@ public static class ManualMenu
         while (true)
         {
             ConsoleUI.PrintHeader();
-            ConsoleUI.PrintMenu("🔍 РУЧНАЯ ПРОВЕРКА", new[]
+            ConsoleUI.PrintMenu("РУЧНАЯ ПРОВЕРКА", new[]
             {
                 "Сеть и интернет",
                 "Защита Windows",
@@ -23,7 +23,7 @@ public static class ManualMenu
                 "Unturned",
                 "Проверка сайтов (oplata.info, funpay.com)",
                 "Проверка Telegram (боты и загрузки)",
-                "📋 Скопировать ключевые слова"
+                "Скопировать ключевые слова"
             }, true);
 
             int choice = ConsoleUI.GetChoice(10);
@@ -76,9 +76,9 @@ public static class ManualMenu
         Common.RunCommand("ms-settings:datausage", "Использование данных");
 
         Console.WriteLine($"\n{ConsoleUI.ColorYellow}{ConsoleUI.ColorBold}ЧТО НУЖНО ПРОВЕРИТЬ:{ConsoleUI.ColorReset}");
-        Console.WriteLine($"  {ConsoleUI.ColorRed}►{ConsoleUI.ColorReset} Неизвестные .exe файлы с сетевой активностью");
-        Console.WriteLine($"  {ConsoleUI.ColorRed}►{ConsoleUI.ColorReset} Подозрительные названия процессов");
-        Console.WriteLine($"  {ConsoleUI.ColorRed}►{ConsoleUI.ColorReset} Большой объем переданных данных");
+        Console.WriteLine($"  {ConsoleUI.Arrow} Неизвестные .exe файлы с сетевой активностью");
+        Console.WriteLine($"  {ConsoleUI.Arrow} Подозрительные названия процессов");
+        Console.WriteLine($"  {ConsoleUI.Arrow} Большой объем переданных данных");
         ConsoleUI.Pause();
     }
 
@@ -90,9 +90,9 @@ public static class ManualMenu
         Common.RunCommand("windowsdefender://threat/", "Журнал защиты Windows Defender");
 
         Console.WriteLine($"\n{ConsoleUI.ColorYellow}{ConsoleUI.ColorBold}КЛЮЧЕВЫЕ СЛОВА ДЛЯ ПОИСКА:{ConsoleUI.ColorReset}");
-        Console.WriteLine($"  {ConsoleUI.ColorRed}►{ConsoleUI.ColorReset} undead, melony, ancient, loader");
-        Console.WriteLine($"  {ConsoleUI.ColorRed}►{ConsoleUI.ColorReset} hack, cheat, unturned, bypass");
-        Console.WriteLine($"  {ConsoleUI.ColorRed}►{ConsoleUI.ColorReset} inject, overlay, esp, aimbot");
+        Console.WriteLine($"  {ConsoleUI.Arrow} undead, melony, ancient, loader");
+        Console.WriteLine($"  {ConsoleUI.Arrow} hack, cheat, unturned, bypass");
+        Console.WriteLine($"  {ConsoleUI.Arrow} inject, overlay, esp, aimbot");
         ConsoleUI.Pause();
     }
 
@@ -101,7 +101,7 @@ public static class ManualMenu
         ConsoleUI.PrintHeader();
         Console.WriteLine($"\n{ConsoleUI.ColorCyan}{ConsoleUI.ColorBold}═══ УТИЛИТЫ ═══{ConsoleUI.ColorReset}\n");
 
-        Console.WriteLine($"  {ConsoleUI.ColorBlue}[i]{ConsoleUI.ColorReset} Открываем ссылки на утилиты для проверки...\n");
+        Console.WriteLine($"  {ConsoleUI.Info} Открываем ссылки на утилиты для проверки...\n");
 
         Common.RunCommand("https://www.voidtools.com/downloads/", "Everything (поиск файлов)");
         Common.RunCommand("https://www.nirsoft.net/utils/computer_activity_view.html", "ComputerActivityView");
@@ -109,10 +109,10 @@ public static class ManualMenu
         Common.RunCommand("https://privazer.com/en/download-shellbag-analyzer-shellbag-cleaner.php", "ShellBag Analyzer");
 
         Console.WriteLine($"\n{ConsoleUI.ColorYellow}{ConsoleUI.ColorBold}УТИЛИТЫ:{ConsoleUI.ColorReset}");
-        Console.WriteLine($"  {ConsoleUI.ColorCyan}►{ConsoleUI.ColorReset} Everything - быстрый поиск файлов на ПК");
-        Console.WriteLine($"  {ConsoleUI.ColorCyan}►{ConsoleUI.ColorReset} ComputerActivityView - активность компьютера");
-        Console.WriteLine($"  {ConsoleUI.ColorCyan}►{ConsoleUI.ColorReset} USBDevicesView - история USB устройств");
-        Console.WriteLine($"  {ConsoleUI.ColorCyan}►{ConsoleUI.ColorReset} ShellBag Analyzer - анализ посещенных папок");
+        Console.WriteLine($"  {ConsoleUI.Arrow} Everything - быстрый поиск файлов на ПК");
+        Console.WriteLine($"  {ConsoleUI.Arrow} ComputerActivityView - активность компьютера");
+        Console.WriteLine($"  {ConsoleUI.Arrow} USBDevicesView - история USB устройств");
+        Console.WriteLine($"  {ConsoleUI.Arrow} ShellBag Analyzer - анализ посещенных папок");
         ConsoleUI.Pause();
     }
 
@@ -269,7 +269,7 @@ public static class ManualMenu
         if (vdfPath == null)
         {
             ConsoleUI.Log("Файл loginusers.vdf не найден", false);
-            Console.WriteLine($"\n{ConsoleUI.ColorYellow}⚠ Steam может быть не установлен или находится в нестандартной директории{ConsoleUI.ColorReset}");
+            Console.WriteLine($"\n{ConsoleUI.Warning} {ConsoleUI.ColorYellow}Steam может быть не установлен или находится в нестандартной директории{ConsoleUI.ColorReset}");
             ConsoleUI.Pause();
             return;
         }
@@ -282,9 +282,9 @@ public static class ManualMenu
         Console.WriteLine($"\n{ConsoleUI.ColorCyan}─────────────────────────────────────────{ConsoleUI.ColorReset}");
 
         Console.WriteLine($"\n{ConsoleUI.ColorYellow}{ConsoleUI.ColorBold}ЧТО НУЖНО ПРОВЕРИТЬ:{ConsoleUI.ColorReset}");
-        Console.WriteLine($"  {ConsoleUI.ColorRed}►{ConsoleUI.ColorReset} Конфигурационные файлы Steam");
-        Console.WriteLine($"  {ConsoleUI.ColorRed}►{ConsoleUI.ColorReset} Информация об аккаунтах");
-        Console.WriteLine($"  {ConsoleUI.ColorRed}►{ConsoleUI.ColorReset} Логи и настройки");
+        Console.WriteLine($"  {ConsoleUI.Arrow} Конфигурационные файлы Steam");
+        Console.WriteLine($"  {ConsoleUI.Arrow} Информация об аккаунтах");
+        Console.WriteLine($"  {ConsoleUI.Arrow} Логи и настройки");
 
         ConsoleUI.Pause();
     }
@@ -314,14 +314,14 @@ public static class ManualMenu
             if (Directory.Exists(screenshots))
             {
                 found = true;
-                Console.WriteLine($"  {ConsoleUI.ColorBlue}[i]{ConsoleUI.ColorReset} Найдено: {ConsoleUI.ColorCyan}{screenshots}{ConsoleUI.ColorReset}\n");
+                Console.WriteLine($"  {ConsoleUI.Info} Найдено: {ConsoleUI.ColorCyan}{screenshots}{ConsoleUI.ColorReset}\n");
                 if (Common.OpenFolder(screenshots, "Папка Screenshots Unturned"))
                 {
                     Console.WriteLine($"\n{ConsoleUI.ColorYellow}{ConsoleUI.ColorBold}ЧТО НУЖНО ПРОВЕРИТЬ:{ConsoleUI.ColorReset}");
-                    Console.WriteLine($"  {ConsoleUI.ColorRed}►{ConsoleUI.ColorReset} UI читов на скриншотах");
-                    Console.WriteLine($"  {ConsoleUI.ColorRed}►{ConsoleUI.ColorReset} ESP/Wallhack индикаторы");
-                    Console.WriteLine($"  {ConsoleUI.ColorRed}►{ConsoleUI.ColorReset} Overlay меню");
-                    Console.WriteLine($"  {ConsoleUI.ColorRed}►{ConsoleUI.ColorReset} Необычные элементы интерфейса");
+                    Console.WriteLine($"  {ConsoleUI.Arrow} UI читов на скриншотах");
+                    Console.WriteLine($"  {ConsoleUI.Arrow} ESP/Wallhack индикаторы");
+                    Console.WriteLine($"  {ConsoleUI.Arrow} Overlay меню");
+                    Console.WriteLine($"  {ConsoleUI.Arrow} Необычные элементы интерфейса");
                 }
                 break;
             }
@@ -330,7 +330,7 @@ public static class ManualMenu
         if (!found)
         {
             ConsoleUI.Log(@"Папка Steam\steamapps\common\Unturned\Screenshots не найдена в системе", false);
-            Console.WriteLine($"\n{ConsoleUI.ColorYellow}⚠ Unturned может быть не установлен или находится в нестандартной директории{ConsoleUI.ColorReset}");
+            Console.WriteLine($"\n{ConsoleUI.Warning} {ConsoleUI.ColorYellow}Unturned может быть не установлен или находится в нестандартной директории{ConsoleUI.ColorReset}");
         }
 
         ConsoleUI.Pause();

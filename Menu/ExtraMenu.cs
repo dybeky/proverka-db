@@ -52,18 +52,18 @@ public static class ExtraMenu
             if (process?.ExitCode == 0)
             {
                 ConsoleUI.Log("Реестр успешно включен", true);
-                Console.WriteLine($"\n{ConsoleUI.ColorGreen}✓ Теперь вы можете открыть regedit{ConsoleUI.ColorReset}");
+                Console.WriteLine($"\n{ConsoleUI.ColorGreen}+ Теперь вы можете открыть regedit{ConsoleUI.ColorReset}");
             }
             else
             {
                 ConsoleUI.Log("Ошибка при включении реестра", false);
-                Console.WriteLine($"\n{ConsoleUI.ColorYellow}⚠ Возможно реестр уже включен или требуются права администратора{ConsoleUI.ColorReset}");
+                Console.WriteLine($"\n{ConsoleUI.Warning} {ConsoleUI.ColorYellow}Возможно реестр уже включен или требуются права администратора{ConsoleUI.ColorReset}");
             }
         }
         catch (Exception ex)
         {
             ConsoleUI.Log($"Ошибка при включении реестра: {ex.Message}", false);
-            Console.WriteLine($"\n{ConsoleUI.ColorYellow}⚠ Возможно реестр уже включен или требуются права администратора{ConsoleUI.ColorReset}");
+            Console.WriteLine($"\n{ConsoleUI.Warning} {ConsoleUI.ColorYellow}Возможно реестр уже включен или требуются права администратора{ConsoleUI.ColorReset}");
         }
 
         ConsoleUI.Pause();
@@ -105,7 +105,7 @@ public static class ExtraMenu
 
                 if (process?.ExitCode == 0)
                 {
-                    ConsoleUI.Log($"✓ Удалена блокировка {value} ({location})", true);
+                    ConsoleUI.Log($"+ Удалена блокировка {value} ({location})", true);
                 }
             }
             catch
@@ -133,7 +133,7 @@ public static class ExtraMenu
 
             if (process?.ExitCode == 0)
             {
-                ConsoleUI.Log("✓ Параметры сети открыты успешно", true);
+                ConsoleUI.Log("+ Параметры сети открыты успешно", true);
             }
             else
             {
@@ -151,14 +151,14 @@ public static class ExtraMenu
         if (success)
         {
             Console.WriteLine($"{ConsoleUI.ColorGreen}{ConsoleUI.ColorBold}╔════════════════════════════════════════════╗{ConsoleUI.ColorReset}");
-            Console.WriteLine($"{ConsoleUI.ColorGreen}║  ✓ ПАРАМЕТРЫ СИСТЕМЫ РАЗБЛОКИРОВАНЫ       ║{ConsoleUI.ColorReset}");
+            Console.WriteLine($"{ConsoleUI.ColorGreen}║  + ПАРАМЕТРЫ СИСТЕМЫ РАЗБЛОКИРОВАНЫ       ║{ConsoleUI.ColorReset}");
             Console.WriteLine($"{ConsoleUI.ColorGreen}{ConsoleUI.ColorBold}╚════════════════════════════════════════════╝{ConsoleUI.ColorReset}");
         }
         else
         {
-            Console.WriteLine($"\n{ConsoleUI.ColorYellow}{ConsoleUI.ColorBold}⚠ Если параметры не открылись:{ConsoleUI.ColorReset}");
-            Console.WriteLine($"  {ConsoleUI.ColorYellow}►{ConsoleUI.ColorReset} Запустите программу от имени администратора");
-            Console.WriteLine($"  {ConsoleUI.ColorYellow}►{ConsoleUI.ColorReset} Проверьте групповые политики (gpedit.msc)");
+            Console.WriteLine($"\n{ConsoleUI.Warning} {ConsoleUI.ColorYellow}{ConsoleUI.ColorBold}Если параметры не открылись:{ConsoleUI.ColorReset}");
+            Console.WriteLine($"  {ConsoleUI.Arrow} Запустите программу от имени администратора");
+            Console.WriteLine($"  {ConsoleUI.Arrow} Проверьте групповые политики (gpedit.msc)");
         }
 
         ConsoleUI.Pause();

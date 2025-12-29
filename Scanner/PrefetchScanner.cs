@@ -39,7 +39,7 @@ public static class PrefetchScanner
                     suspiciousFiles.Add(file);
 
                     var fileInfo = new FileInfo(file);
-                    Console.WriteLine($"{ConsoleUI.ColorRed}{ConsoleUI.ColorBold}►{ConsoleUI.ColorReset} {fileName}");
+                    Console.WriteLine($"  {ConsoleUI.Arrow} {fileName}");
                     Console.WriteLine($"   Последнее изменение: {fileInfo.LastWriteTime:dd.MM.yyyy HH:mm:ss}\n");
                 }
             }
@@ -57,7 +57,7 @@ public static class PrefetchScanner
             ConsoleUI.Log($"Найдено подозрительных .pf файлов: {suspiciousFiles.Count}", false);
             Console.WriteLine($"\n{ConsoleUI.ColorGreen}[V]{ConsoleUI.ColorReset} - Просмотреть все файлы постранично");
             Console.WriteLine($"{ConsoleUI.ColorCyan}[0]{ConsoleUI.ColorReset} - Продолжить");
-            Console.Write($"\n{ConsoleUI.ColorGreen}{ConsoleUI.ColorBold}►{ConsoleUI.ColorReset} Выберите действие: ");
+            Console.Write($"\n{ConsoleUI.ColorGreen}{ConsoleUI.ColorBold}[>]{ConsoleUI.ColorReset} Выберите действие: ");
 
             var choice = Console.ReadLine()?.ToLower().Trim();
 

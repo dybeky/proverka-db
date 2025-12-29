@@ -137,19 +137,19 @@ public static class Common
         {
             if (RunCommand(url, name))
             {
-                ConsoleUI.Log($"✓ Открыт: {name}", true);
+                ConsoleUI.Log($"+ Открыт: {name}", true);
             }
             else
             {
-                ConsoleUI.Log($"✗ Ошибка открытия: {name}", false);
+                ConsoleUI.Log($"- Ошибка открытия: {name}", false);
             }
         }
 
         Console.WriteLine($"\n{ConsoleUI.ColorYellow}{ConsoleUI.ColorBold}ЧТО ПРОВЕРИТЬ:{ConsoleUI.ColorReset}");
-        Console.WriteLine($"  {ConsoleUI.ColorRed}►{ConsoleUI.ColorReset} Доступность сайтов (открываются ли страницы)");
-        Console.WriteLine($"  {ConsoleUI.ColorRed}►{ConsoleUI.ColorReset} Нет ли редиректов на подозрительные домены");
-        Console.WriteLine($"  {ConsoleUI.ColorRed}►{ConsoleUI.ColorReset} Корректность отображения сайтов");
-        Console.WriteLine($"  {ConsoleUI.ColorRed}►{ConsoleUI.ColorReset} Нет ли предупреждений браузера");
+        Console.WriteLine($"  {ConsoleUI.Arrow} Доступность сайтов (открываются ли страницы)");
+        Console.WriteLine($"  {ConsoleUI.Arrow} Нет ли редиректов на подозрительные домены");
+        Console.WriteLine($"  {ConsoleUI.Arrow} Корректность отображения сайтов");
+        Console.WriteLine($"  {ConsoleUI.Arrow} Нет ли предупреждений браузера");
 
         ConsoleUI.Pause();
     }
@@ -223,11 +223,11 @@ public static class Common
             var telegramUrl = $"tg://resolve?domain={username.TrimStart('@')}";
             if (RunCommand(telegramUrl, name))
             {
-                ConsoleUI.Log($"✓ Открыт: {name} ({username})", true);
+                ConsoleUI.Log($"+ Открыт: {name} ({username})", true);
             }
             else
             {
-                ConsoleUI.Log($"✗ Ошибка открытия: {name}", false);
+                ConsoleUI.Log($"- Ошибка открытия: {name}", false);
             }
         }
 
@@ -249,7 +249,7 @@ public static class Common
         var telegramDataPath = Path.Combine(appData, "Telegram Desktop");
         if (Directory.Exists(telegramDataPath))
         {
-            ConsoleUI.Log($"✓ Найдена папка данных Telegram: {telegramDataPath}", true);
+            ConsoleUI.Log($"+ Найдена папка данных Telegram: {telegramDataPath}", true);
             possiblePaths.Insert(0, Path.Combine(telegramDataPath, "tdata", "user_data"));
         }
 
@@ -259,7 +259,7 @@ public static class Common
             if (Directory.Exists(downloadPath))
             {
                 foundDownloads = true;
-                ConsoleUI.Log($"✓ Найдена папка загрузок: {downloadPath}", true);
+                ConsoleUI.Log($"+ Найдена папка загрузок: {downloadPath}", true);
                 OpenFolder(downloadPath, "Папка загрузок Telegram");
                 break;
             }
@@ -267,18 +267,18 @@ public static class Common
 
         if (!foundDownloads)
         {
-            ConsoleUI.Log("✗ Папка загрузок Telegram не найдена", false);
-            Console.WriteLine($"\n{ConsoleUI.ColorYellow}{ConsoleUI.ColorBold}⚠ Возможные причины:{ConsoleUI.ColorReset}");
-            Console.WriteLine($"  {ConsoleUI.ColorYellow}►{ConsoleUI.ColorReset} Telegram не установлен");
-            Console.WriteLine($"  {ConsoleUI.ColorYellow}►{ConsoleUI.ColorReset} Папка загрузок находится в другом месте");
-            Console.WriteLine($"  {ConsoleUI.ColorYellow}►{ConsoleUI.ColorReset} Файлы не загружались через Telegram");
+            ConsoleUI.Log("- Папка загрузок Telegram не найдена", false);
+            Console.WriteLine($"\n{ConsoleUI.Warning} {ConsoleUI.ColorYellow}{ConsoleUI.ColorBold}Возможные причины:{ConsoleUI.ColorReset}");
+            Console.WriteLine($"  {ConsoleUI.Arrow} Telegram не установлен");
+            Console.WriteLine($"  {ConsoleUI.Arrow} Папка загрузок находится в другом месте");
+            Console.WriteLine($"  {ConsoleUI.Arrow} Файлы не загружались через Telegram");
         }
 
         Console.WriteLine($"\n{ConsoleUI.ColorYellow}{ConsoleUI.ColorBold}ЧТО ПРОВЕРИТЬ В TELEGRAM:{ConsoleUI.ColorReset}");
-        Console.WriteLine($"  {ConsoleUI.ColorRed}►{ConsoleUI.ColorReset} Историю переписки с ботами @MelonySolutionBot и @UndeadSellerBot");
-        Console.WriteLine($"  {ConsoleUI.ColorRed}►{ConsoleUI.ColorReset} Загруженные файлы (.exe, .dll, .bat, .zip)");
-        Console.WriteLine($"  {ConsoleUI.ColorRed}►{ConsoleUI.ColorReset} Подозрительные архивы и установщики");
-        Console.WriteLine($"  {ConsoleUI.ColorRed}►{ConsoleUI.ColorReset} Переданные платежи или транзакции");
+        Console.WriteLine($"  {ConsoleUI.Arrow} Историю переписки с ботами @MelonySolutionBot и @UndeadSellerBot");
+        Console.WriteLine($"  {ConsoleUI.Arrow} Загруженные файлы (.exe, .dll, .bat, .zip)");
+        Console.WriteLine($"  {ConsoleUI.Arrow} Подозрительные архивы и установщики");
+        Console.WriteLine($"  {ConsoleUI.Arrow} Переданные платежи или транзакции");
 
         ConsoleUI.Pause();
     }

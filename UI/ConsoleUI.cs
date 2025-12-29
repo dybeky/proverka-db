@@ -30,6 +30,14 @@ public static class ConsoleUI
     public const string ColorWhite = "\x1b[37m";
     public const string ColorBold = "\x1b[1m";
 
+    // Префиксы для логов и сообщений
+    public static string Success => $"{ColorGreen}[+]{ColorReset}";
+    public static string Error => $"{ColorRed}[-]{ColorReset}";
+    public static string Info => $"{ColorBlue}[i]{ColorReset}";
+    public static string Warning => $"{ColorYellow}[!]{ColorReset}";
+    public static string Arrow => $"{ColorCyan}[>]{ColorReset}";
+    public static string Scan => $"{ColorMagenta}[*]{ColorReset}";
+
     public static void SetAdminStatus(bool isAdmin)
     {
         _isAdmin = isAdmin;
@@ -94,32 +102,36 @@ public static class ConsoleUI
 
         if (_isAdmin)
         {
-            Console.WriteLine($"  {ColorGreen}[✓]{ColorReset} Статус: {ColorGreen}{ColorBold}Администратор{ColorReset}");
+            Console.WriteLine($"  {Success} Статус: {ColorGreen}{ColorBold}Администратор{ColorReset}");
         }
         else
         {
-            Console.WriteLine($"  {ColorRed}[✗]{ColorReset} Статус: {ColorRed}{ColorBold}Отсутствуют права администратора!{ColorReset}");
+            Console.WriteLine($"  {Error} Статус: {ColorRed}{ColorBold}Отсутствуют права администратора!{ColorReset}");
         }
-        Console.WriteLine($"  {ColorBlue}[i]{ColorReset} Дата: {DateTime.Now:dd.MM.yyyy HH:mm:ss}");
+        Console.WriteLine($"  {Info} Дата: {DateTime.Now:dd.MM.yyyy HH:mm:ss}");
         Console.WriteLine();
     }
 
     public static void PrintMenu(string title, string[] options, bool showBack)
     {
-        Console.WriteLine($"\n{ColorYellow}{ColorBold}{title}{ColorReset}\n");
+        // Добавляем отступ для заголовка (не полный центр, а ближе к меню)
+        int padding = 10; // Фиксированный отступ
+        string centeredTitle = new string(' ', padding) + title;
+
+        Console.WriteLine($"\n{ColorYellow}{ColorBold}{centeredTitle}{ColorReset}\n");
 
         for (int i = 0; i < options.Length; i++)
         {
-            Console.WriteLine($"  {ColorCyan}{ColorBold}[{i + 1}]{ColorReset} ➤ {options[i]}");
+            Console.WriteLine($"  {ColorCyan}{ColorBold}[{i + 1}]{ColorReset} {Arrow} {options[i]}");
         }
 
         if (showBack)
         {
-            Console.WriteLine($"\n  {ColorMagenta}{ColorBold}[0]{ColorReset} ← {ColorMagenta}Назад{ColorReset}");
+            Console.WriteLine($"\n  {ColorMagenta}{ColorBold}[0]{ColorReset} {ColorMagenta}< Назад{ColorReset}");
         }
         else
         {
-            Console.WriteLine($"\n  {ColorRed}{ColorBold}[0]{ColorReset} ✖ {ColorRed}Выход{ColorReset}");
+            Console.WriteLine($"\n  {ColorRed}{ColorBold}[0]{ColorReset} {ColorRed}X Выход{ColorReset}");
         }
         Console.WriteLine();
     }
@@ -128,7 +140,7 @@ public static class ConsoleUI
     {
         while (true)
         {
-            Console.Write($"\n{ColorGreen}{ColorBold}►{ColorReset} Выберите опцию [0-{maxOpt}]: ");
+            Console.Write($"\n{ColorGreen}{ColorBold}[>]{ColorReset} Выберите опцию [0-{maxOpt}]: ");
 
             string? input = Console.ReadLine();
             if (string.IsNullOrEmpty(input))
@@ -139,7 +151,7 @@ public static class ConsoleUI
                 return choice;
             }
 
-            Console.WriteLine($"\n{ColorRed}{ColorBold}⚠ Ошибка: Введите число от 0 до {maxOpt}{ColorReset}");
+            Console.WriteLine($"\n{Warning} {ColorRed}{ColorBold}Ошибка: Введите число от 0 до {maxOpt}{ColorReset}");
         }
     }
 
@@ -150,7 +162,7 @@ public static class ConsoleUI
 
     public static void Pause()
     {
-        Console.WriteLine($"\n{ColorGreen}{ColorBold}►{ColorReset} Нажмите Enter для продолжения...");
+        Console.WriteLine($"\n{ColorGreen}{ColorBold}[>]{ColorReset} Нажмите Enter для продолжения...");
         Console.ReadLine();
     }
 
@@ -193,7 +205,7 @@ public static class ConsoleUI
             }
             Console.WriteLine($"  {ColorRed}[0]{ColorReset} - Вернуться назад");
 
-            Console.Write($"\n{ColorGreen}{ColorBold}►{ColorReset} Выберите действие: ");
+            Console.Write($"\n{ColorGreen}{ColorBold}[>]{ColorReset} Выберите действие: ");
             string? input = Console.ReadLine()?.ToLower().Trim();
 
             switch (input)
@@ -205,7 +217,7 @@ public static class ConsoleUI
                     }
                     else
                     {
-                        Console.WriteLine($"{ColorYellow}⚠ Это последняя страница{ColorReset}");
+                        Console.WriteLine($"{Warning} {ColorYellow}Это последняя страница{ColorReset}");
                         Thread.Sleep(500);
                     }
                     break;
@@ -216,7 +228,7 @@ public static class ConsoleUI
                     }
                     else
                     {
-                        Console.WriteLine($"{ColorYellow}⚠ Это первая страница{ColorReset}");
+                        Console.WriteLine($"{Warning} {ColorYellow}Это первая страница{ColorReset}");
                         Thread.Sleep(500);
                     }
                     break;
@@ -225,7 +237,7 @@ public static class ConsoleUI
                 case null:
                     return;
                 default:
-                    Console.WriteLine($"{ColorRed}⚠ Неверная команда{ColorReset}");
+                    Console.WriteLine($"{Error} {ColorRed}Неверная команда{ColorReset}");
                     Thread.Sleep(500);
                     break;
             }
@@ -241,10 +253,10 @@ public static class ConsoleUI
         Console.WriteLine($"{ColorCyan}{ColorBold}║{ColorReset}    {ColorMagenta}{ColorBold}░█░░░█░█░▀▀█░░█░░█░█░▀▀█░░░░░█▀▀░▄▀▄░░█░░░█░{ColorReset}    {ColorCyan}{ColorBold}║{ColorReset}");
         Console.WriteLine($"{ColorCyan}{ColorBold}║{ColorReset}    {ColorMagenta}{ColorBold}░▀▀▀░▀▀▀░▀▀▀░░▀░░▀▀▀░▀▀▀░▀░░░▀▀▀░▀░▀░▀▀▀░░▀░{ColorReset}    {ColorCyan}{ColorBold}║{ColorReset}");
         Console.WriteLine($"{ColorCyan}{ColorBold}║{ColorReset}                                                           {ColorCyan}{ColorBold}║{ColorReset}");
-        Console.WriteLine($"{ColorCyan}{ColorBold}║{ColorReset}          {ColorYellow}{ColorBold}✨ Спасибо за использование! ✨{ColorReset}              {ColorCyan}{ColorBold}║{ColorReset}");
+        Console.WriteLine($"{ColorCyan}{ColorBold}║{ColorReset}           {ColorYellow}{ColorBold}Спасибо за использование!{ColorReset}                   {ColorCyan}{ColorBold}║{ColorReset}");
         Console.WriteLine($"{ColorCyan}{ColorBold}║{ColorReset}                                                           {ColorCyan}{ColorBold}║{ColorReset}");
-        Console.WriteLine($"{ColorCyan}{ColorBold}║{ColorReset}    {ColorGreen}⚡ Ваша система проверена на безопасность ⚡{ColorReset}     {ColorCyan}{ColorBold}║{ColorReset}");
-        Console.WriteLine($"{ColorCyan}{ColorBold}║{ColorReset}         🛡️  Будьте бдительны и осторожны! 🛡️          {ColorCyan}{ColorBold}║{ColorReset}");
+        Console.WriteLine($"{ColorCyan}{ColorBold}║{ColorReset}     {ColorGreen}Ваша система проверена на безопасность{ColorReset}       {ColorCyan}{ColorBold}║{ColorReset}");
+        Console.WriteLine($"{ColorCyan}{ColorBold}║{ColorReset}          {ColorYellow}Будьте бдительны и осторожны!{ColorReset}             {ColorCyan}{ColorBold}║{ColorReset}");
         Console.WriteLine($"{ColorCyan}{ColorBold}║{ColorReset}                                                           {ColorCyan}{ColorBold}║{ColorReset}");
         Console.WriteLine($"{ColorCyan}{ColorBold}╚═══════════════════════════════════════════════════════════╝{ColorReset}");
         Console.WriteLine();
