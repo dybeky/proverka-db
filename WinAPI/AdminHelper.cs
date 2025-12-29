@@ -1,8 +1,10 @@
 using System.Diagnostics;
+using System.Runtime.Versioning;
 using System.Security.Principal;
 
 namespace CustosAC.WinAPI;
 
+[SupportedOSPlatform("windows")]
 public static class AdminHelper
 {
     private static readonly List<Process> _runningProcesses = new();
