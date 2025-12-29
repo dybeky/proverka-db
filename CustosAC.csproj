@@ -6,6 +6,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <ApplicationManifest>app.manifest</ApplicationManifest>
+    <ApplicationIcon>custosACicon.ico</ApplicationIcon>
     <AssemblyName>CustosAC</AssemblyName>
     <RootNamespace>CustosAC</RootNamespace>
     <PublishSingleFile>true</PublishSingleFile>
